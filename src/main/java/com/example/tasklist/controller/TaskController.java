@@ -2,6 +2,7 @@ package com.example.tasklist.controller;
 
 import com.example.tasklist.model.TaskList;
 import com.example.tasklist.service.TaskService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +21,8 @@ public class TaskController {
     }
 
     @GetMapping("/{id}")
-    public TaskList getTask(@PathVariable long id){
-        return taskService.getTask(id);
+    public ResponseEntity<TaskList> getTask(@PathVariable long id){
+        return taskService.getTask(id).map(ResponseEntity.ok()).orELSE(ResponseEntity.notFound().build());
     }
 
     @PostMapping
@@ -40,8 +41,8 @@ public class TaskController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteTask(@PathVariable long id, @RequestBody TaskList taskList){
-
+    public void deleteTask(@PathVariable long id){
+        taskService.delete(id);
     }
 
 }
