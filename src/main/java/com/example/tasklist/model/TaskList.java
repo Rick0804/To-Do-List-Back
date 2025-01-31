@@ -2,6 +2,7 @@ package com.example.tasklist.model;
 
 import com.example.tasklist.enums.TaskEnum;
 import jakarta.persistence.*;
+import org.springframework.http.ResponseEntity;
 
 @Entity
 @Table(name = "taskList")
@@ -20,6 +21,9 @@ public class TaskList {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TaskEnum taskEnum;
+    public TaskList(){
+
+    }
 
     public TaskList(String taskTitle, String taskDescription, TaskEnum taskEnum){
         this.taskTitle = taskTitle;
@@ -32,11 +36,11 @@ public class TaskList {
         this.id = id;
     }
 
-    public String gettaskDescription() {
+    public String getTaskDescription() {
         return taskDescription;
     }
 
-    public void settaskDescription(String taskDescription) {
+    public void setTaskDescription(String taskDescription) {
         this.taskDescription = taskDescription;
     }
 
@@ -65,4 +69,6 @@ public class TaskList {
                 ", taskEnum=" + taskEnum +
                 '}';
     }
+
+
 }

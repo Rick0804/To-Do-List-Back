@@ -7,42 +7,44 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/TaskList")
 public class TaskController {
-    @Autowired
+
     private TaskService taskService;
+
+    @Autowired
+    public TaskController(TaskService taskService){
+        this.taskService = taskService;
+    }
 
     @GetMapping
     public List<TaskList> getAllTask(){
-        return taskService.getAllTasks();
+        return taskService.getTaskList();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TaskList> getTask(@PathVariable long id){
-        return taskService.getTask(id).map(ResponseEntity.ok()).orELSE(ResponseEntity.notFound().build());
+    public Optional<TaskList> getTask(@PathVariable long id){
+        return taskService.getTask(id);
     }
 
     @PostMapping
     public void saveTask(@RequestBody TaskList taskList){
-        taskService.save(taskList);
+        taskService.createTask(taskList);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<taskList> editTask(@PathVariable long id, @RequestBody TaskList taskList){
-        try{
-            return ResponseEntity.ok(taskList.edit(id, taskList));
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
-        taskService.edit(taskList);
+    public void editTask(@PathVariable long id, @RequestBody TaskList taskList){
+        taskService.editTask(id, taskList);
     }
 
     @DeleteMapping("/{id}")
     public void deleteTask(@PathVariable long id){
-        taskService.delete(id);
+        taskService.deleteTask(id);
     }
 
 }
