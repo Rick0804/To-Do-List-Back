@@ -18,6 +18,10 @@ public class GoalService {
     }
 
     public Optional<GoalModel> getGoal(long id){
+        Optional<GoalModel> goal = goalRepository.findById(id);
+        if(!goal.isPresent()){
+            throw new RuntimeException("Meta não encontradas");
+        }
         return goalRepository.findById(id);
     }
 
@@ -34,7 +38,11 @@ public class GoalService {
         GoalModel goal = goalOp.get();
         goal.setGoalTitle(goalModel.getGoalTitle());
         goal.setGoalDescription(goalModel.getGoalDescription());
-        goal.setTaskEnum(goalModel.getTaskEnum());
+        goal.setGoalEnum(goalModel.getGoalEnum());
         goalRepository.save(goal);
+    }
+
+    public void delete(long id){
+        goalRepository.deleteById(id);
     }
 }

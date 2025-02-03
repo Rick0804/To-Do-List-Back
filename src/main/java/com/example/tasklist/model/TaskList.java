@@ -2,7 +2,6 @@ package com.example.tasklist.model;
 
 import com.example.tasklist.enums.TaskEnum;
 import jakarta.persistence.*;
-import org.springframework.http.ResponseEntity;
 
 @Entity
 @Table(name = "taskList")

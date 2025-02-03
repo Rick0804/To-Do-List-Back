@@ -23,7 +23,11 @@ public class TaskService {
     };
 
     public Optional<TaskList> getTask(long id){
-        return taskRepository.findById(id);
+        Optional<TaskList> task = taskRepository.findById(id);
+        if(!task.isPresent()){
+            throw new RuntimeException("Tarefa não encontrada");
+        }
+        return task;
     }
 
     public void createTask(TaskList taskList){

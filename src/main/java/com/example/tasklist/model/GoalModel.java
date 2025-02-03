@@ -19,18 +19,24 @@ public class GoalModel {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private TaskEnum taskEnum;
+    private TaskEnum goalEnum;
+
+    public GoalModel(String goalTitle, String goalDescription, TaskEnum goalEnum){
+        this.goalTitle = goalTitle;
+        this.goalDescription = goalDescription;
+        this.goalEnum = goalEnum;
+    }
 
     public long getId() {
         return id;
     }
 
-    public TaskEnum getTaskEnum() {
-        return taskEnum;
+    public TaskEnum getGoalEnum() {
+        return goalEnum;
     }
 
-    public void setTaskEnum(TaskEnum taskEnum) {
-        this.taskEnum = taskEnum;
+    public void setGoalEnum(TaskEnum GoalEnum) {
+        this.goalEnum = GoalEnum;
     }
 
     public String getGoalDescription() {
@@ -55,7 +61,7 @@ public class GoalModel {
                 "id=" + id +
                 ", goalTitle='" + goalTitle + '\'' +
                 ", goalDescription='" + goalDescription + '\'' +
-                ", taskEnum=" + taskEnum +
+                ", goalEnum=" + goalEnum +
                 '}';
     }
 
