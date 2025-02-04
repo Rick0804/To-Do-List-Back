@@ -20,6 +20,7 @@ public class TaskList {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TaskEnum taskEnum;
+
     public TaskList(){
 
     }
@@ -29,7 +30,6 @@ public class TaskList {
         this.taskDescription = taskDescription;
         this.taskEnum = taskEnum;
     }
-
 
     public void setId(long id) {
         this.id = id;

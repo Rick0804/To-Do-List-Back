@@ -15,6 +15,10 @@ public class NotesModel {
     @Column(nullable = false)
     private String noteDescription;
 
+    public NotesModel() {
+
+    }
+
     public NotesModel(String noteTitle, String noteDescription){
         this.noteTitle = noteTitle;
         this.noteDescription = noteDescription;

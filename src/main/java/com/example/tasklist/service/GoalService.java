@@ -17,6 +17,10 @@ public class GoalService {
         this.goalRepository = goalRepository;
     }
 
+    public List<GoalModel> getGoalList(){
+        return goalRepository.findAll();
+    }
+
     public Optional<GoalModel> getGoal(long id){
         Optional<GoalModel> goal = goalRepository.findById(id);
         if(!goal.isPresent()){
@@ -25,15 +29,11 @@ public class GoalService {
         return goalRepository.findById(id);
     }
 
-    public List<GoalModel> getAllGoal(){
-        return goalRepository.findAll();
-    }
-
-    public void save(GoalModel goalModel){
+    public void createGoal(GoalModel goalModel){
         goalRepository.save(goalModel);
     }
 
-    public void edit(long id ,GoalModel goalModel){
+    public void editGoal(long id , GoalModel goalModel){
         Optional<GoalModel> goalOp = goalRepository.findById(id);
         GoalModel goal = goalOp.get();
         goal.setGoalTitle(goalModel.getGoalTitle());
@@ -42,7 +42,7 @@ public class GoalService {
         goalRepository.save(goal);
     }
 
-    public void delete(long id){
+    public void deleteGoal(long id){
         goalRepository.deleteById(id);
     }
 }

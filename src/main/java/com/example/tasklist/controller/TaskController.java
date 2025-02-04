@@ -15,11 +15,12 @@ import java.util.Optional;
 @RequestMapping("/TaskList")
 public class TaskController {
 
+    @Autowired
     private TaskService taskService;
 
-    @Autowired
-    public TaskController(TaskService taskService){
-        this.taskService = taskService;
+    @PostMapping
+    public void addTask(@RequestBody TaskList taskList){
+        taskService.createTask(taskList);
     }
 
     @GetMapping
@@ -30,11 +31,6 @@ public class TaskController {
     @GetMapping("/{id}")
     public Optional<TaskList> getTask(@PathVariable long id){
         return taskService.getTask(id);
-    }
-
-    @PostMapping
-    public void saveTask(@RequestBody TaskList taskList){
-        taskService.createTask(taskList);
     }
 
     @PutMapping("/{id}")

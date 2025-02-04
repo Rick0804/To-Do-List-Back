@@ -11,31 +11,33 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/Goal")
 public class GoalController {
+
     @Autowired
     private GoalService goalService;
 
+    @PostMapping
+    public void addGoal(@RequestBody GoalModel goalModel){
+        goalService.createGoal(goalModel);
+    }
+
     @GetMapping
-    private List<GoalModel> getAllGoal(){
-        return goalService.getAllGoal();
+    public List<GoalModel> getAllGoal(){
+        return goalService.getGoalList();
     }
 
     @GetMapping("/{id}")
-    private Optional<GoalModel> getGoal(@PathVariable long id){
+    public Optional<GoalModel> getGoal(@PathVariable long id){
         return goalService.getGoal(id);
-    }
-
-    @PostMapping
-    public void addGoal(@RequestBody GoalModel goalModel){
-        goalService.save(goalModel);
     }
 
     @PutMapping("/{id}")
     public void editGoal(@PathVariable long id, @RequestBody GoalModel goalModel){
-        goalService.edit(id, goalModel);
+        goalService.editGoal(id, goalModel);
     }
 
+    @DeleteMapping("/{id}")
     public void deleteGoal(@PathVariable long id){
-        goalService.delete(id);
+        goalService.deleteGoal(id);
     }
 
 }

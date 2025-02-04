@@ -21,6 +21,10 @@ public class GoalModel {
     @Column(nullable = false)
     private TaskEnum goalEnum;
 
+    public GoalModel() {
+
+    }
+
     public GoalModel(String goalTitle, String goalDescription, TaskEnum goalEnum){
         this.goalTitle = goalTitle;
         this.goalDescription = goalDescription;

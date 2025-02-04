@@ -3,11 +3,12 @@ package com.example.tasklist.service;
 import com.example.tasklist.model.NotesModel;
 import com.example.tasklist.repository.NotesRespository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class NotesService {
     private NotesRespository notesRespository;
 
@@ -16,15 +17,19 @@ public class NotesService {
            this.notesRespository = notesRespository;
     }
 
-    public List<NotesModel> getAllNoteList(){
+    public List<NotesModel> getNoteList(){
         return notesRespository.findAll();
     }
 
-    public Optional<NotesModel> getNote(@PathVariable long id){
+    public Optional<NotesModel> getNote(long id){
         return notesRespository.findById(id);
     }
 
-    public void editTask(@PathVariable long id, NotesModel notesModel){
+    public void createNote(NotesModel notesModel){
+       notesRespository.save(notesModel);
+    }
+
+    public void editNote(long id, NotesModel notesModel){
         Optional<NotesModel> noteOp = notesRespository.findById(id);
         if(!noteOp.isPresent()){
             throw new RuntimeException("ID não encontrado");
@@ -32,5 +37,11 @@ public class NotesService {
         NotesModel note = noteOp.get();
         note.setNoteTitle(notesModel.getNoteTitle());
         note.setNoteDescription(notesModel.getNoteDescription());
+        notesRespository.save(note);
     }
+
+    public void deleteNote(long id){
+        notesRespository.deleteById(id);
+    }
+
 }
