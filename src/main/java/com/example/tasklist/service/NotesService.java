@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Service
 public class NotesService {
-    private NotesRespository notesRespository;
+    private final NotesRespository notesRespository;
 
     @Autowired
     public NotesService(NotesRespository notesRespository){

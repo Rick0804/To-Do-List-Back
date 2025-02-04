@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Service
 public class GoalService {
-    private GoalRepository goalRepository;
+    private final GoalRepository goalRepository;
 
     @Autowired
     public GoalService(GoalRepository goalRepository){
